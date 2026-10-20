@@ -24,8 +24,22 @@
 
   function init() {
     applyTheme(STATE.theme);
+    updateDynamicHost();
     loadSavedLinks();
     initEventListeners();
+  }
+
+  function updateDynamicHost() {
+    try {
+      const host = window.location.host;
+      if (!host) return;
+      document.querySelectorAll(".dynamic-host").forEach(el => {
+        el.textContent = host;
+      });
+      document.querySelectorAll(".dynamic-host-prefix").forEach(el => {
+        el.textContent = host + "/";
+      });
+    } catch (_) {}
   }
 
   if (document.readyState === "loading") {

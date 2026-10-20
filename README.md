@@ -79,15 +79,42 @@ curl -s "https://short.290102.xyz/api/stats/mi-alias"
 
 ---
 
-## Despliegue con Wrangler
+## Cómo instalarlo en tu propia cuenta de Cloudflare
 
+Cualquier usuario puede desplegar su propia instancia en minutos siguiendo estos pasos:
+
+### 1. Clonar el repositorio
 ```bash
-# 1. Crear la base de datos D1 (si no existe)
-npx wrangler d1 create short-db
-
-# 2. Ejecutar esquema inicial
-npx wrangler d1 execute short-db --remote --command="CREATE TABLE IF NOT EXISTS links (slug TEXT PRIMARY KEY, target_url TEXT NOT NULL, created_at INTEGER NOT NULL, expires_at INTEGER NOT NULL, clicks INTEGER DEFAULT 0);"
-
-# 3. Desplegar en Cloudflare Pages
-npx wrangler pages deploy public --project-name=short-290102
+git clone https://github.com/bywarmx/short-290102.git
+cd short-290102
 ```
+
+### 2. Iniciar sesión en Cloudflare (Wrangler)
+```bash
+npx wrangler login
+```
+
+### 3. Crear tu base de datos D1
+```bash
+npx wrangler d1 create short-db
+```
+Copia el `database_id` que te devuelva el comando en la terminal.
+
+### 4. Configurar `wrangler.toml`
+Copia el archivo de ejemplo o edita `wrangler.toml`:
+```bash
+cp wrangler.toml.example wrangler.toml
+```
+Pega tu `database_id` obtenido en el paso anterior dentro de `wrangler.toml`.
+
+### 5. Crear la tabla en D1
+```bash
+npx wrangler d1 execute short-db --remote --command="CREATE TABLE IF NOT EXISTS links (slug TEXT PRIMARY KEY, target_url TEXT NOT NULL, created_at INTEGER NOT NULL, expires_at INTEGER NOT NULL, clicks INTEGER DEFAULT 0);"
+```
+
+### 6. Desplegar en Cloudflare Pages
+```bash
+npx wrangler pages deploy public --project-name=mi-acortador
+```
+
+¡Listo! Cloudflare Pages te proporcionará tu URL pública (ejemplo: `https://mi-acortador.pages.dev`). Opcionalmente, puedes vincular tu propio subdominio personalizado desde el panel de Cloudflare Pages > Custom domains.

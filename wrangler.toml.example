@@ -1,0 +1,11 @@
+name = "tu-acortador"
+compatibility_date = "2026-10-19"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "public"
+
+# Configuración de Cloudflare D1
+# Reemplaza 'database_id' con el ID generado por: npx wrangler d1 create short-db
+[[d1_databases]]
+binding = "DB"
+database_name = "short-db"
+database_id = "TU_DATABASE_ID_AQUI"

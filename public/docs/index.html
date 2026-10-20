@@ -388,6 +388,14 @@ print("URL acortada:", data["shortUrl"])</code></pre>
   <div id="toast-container"></div>
 
   <script>
+    // Adapt domain to current deployment host
+    try {
+      var curOrigin = window.location.origin;
+      if (curOrigin && curOrigin !== "https://short.290102.xyz" && window.location.hostname !== "") {
+        document.body.innerHTML = document.body.innerHTML.split("https://short.290102.xyz").join(curOrigin);
+      }
+    } catch (e) {}
+
     // Tab switching
     document.querySelectorAll(".api-tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {

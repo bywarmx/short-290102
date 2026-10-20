@@ -146,7 +146,7 @@ async function handleApi(request, env, ctx, url) {
 
       // Prevent loop (cannot shorten a link to the shortener itself)
       const parsedTarget = new URL(targetUrl);
-      if (parsedTarget.hostname === url.hostname || parsedTarget.hostname === "short.290102.xyz") {
+      if (parsedTarget.hostname === url.hostname) {
         return withCors(json({ ok: false, error: "loop_forbidden", message: "No puedes acortar un enlace que apunta a este mismo dominio." }, 400));
       }
 
@@ -301,7 +301,7 @@ function notFoundHtml(slug, title, message) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${title} - short.290102.xyz</title>
+  <title>${title} - ShortLink</title>
   <style>
     * { box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     body { background: #0b0f19; color: #f8fafc; min-height: 100vh; display: grid; place-items: center; margin: 0; padding: 20px; text-align: center; }
