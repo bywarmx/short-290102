@@ -1,0 +1,9 @@
+name = "short-290102"
+compatibility_date = "2026-10-19"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "short-db"
+database_id = "b6bbdf11-b479-40d6-8ddb-b957e6bc4315"
